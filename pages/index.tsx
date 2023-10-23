@@ -10,21 +10,30 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import _ from "lodash";
+
 import { Button } from "@/components/ui/button";
 import { BsSearchHeartFill } from "react-icons/bs";
 
 const inter = Inter({ subsets: ["latin"] });
 interface dataType {
   course_name: string;
+  id: number;
+  platform: string;
+  free_course: string;
+
+  link: string;
+  difficulty: string;
+  module_number: number;
+  certification: string;
 }
 export default function Home() {
   const [input, setInput] = useState("");
+
   const FindMatch = (input: string, data: dataType[]): dataType[] => {
-    const re = new RegExp(_.escapeRegExp(input), "i");
+    const re = new RegExp(escapeRegExp(input), "i");
 
     const isMatch = (result: dataType) => re.test(result.course_name);
-    const res = _.filter(data, isMatch);
+    const res = data.filter(isMatch);
 
     if (res.length > 0) {
       return res;
@@ -32,6 +41,10 @@ export default function Home() {
       return data;
     }
   };
+
+  function escapeRegExp(string: string) {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  }
 
   if (data) {
     return (
