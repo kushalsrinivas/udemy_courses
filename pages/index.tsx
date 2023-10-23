@@ -12,9 +12,8 @@ import {
 import { Input } from "@/components/ui/input";
 
 import { Button } from "@/components/ui/button";
-import { BsSearchHeartFill } from "react-icons/bs";
 
-const inter = Inter({ subsets: ["latin"] });
+import { ModeToggle } from "@/components/toogle-button";
 interface dataType {
   course_name: string;
   id: number;
@@ -26,6 +25,7 @@ interface dataType {
   module_number: number;
   certification: string;
 }
+
 export default function Home() {
   const [input, setInput] = useState("");
 
@@ -49,7 +49,7 @@ export default function Home() {
   if (data) {
     return (
       <div>
-        <div className="flex flex-row p-2 m-2">
+        <div className="flex flex-row p-2 m-2 gap-2">
           <Input
             placeholder="search courses .... "
             value={input}
@@ -58,6 +58,7 @@ export default function Home() {
               setInput(e.target.value);
             }}
           ></Input>
+          <ModeToggle></ModeToggle>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-4">
           {FindMatch(input, data).map((res, id) => {
