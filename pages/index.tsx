@@ -64,7 +64,7 @@ export default function Home() {
           {FindMatch(input, data).map((res, id) => {
             return (
               <div className="p-2 " key={id}>
-                <Card className="">
+                <Card>
                   <CardHeader>
                     <CardTitle>{res.course_name}</CardTitle>
                     <CardDescription>
@@ -72,7 +72,13 @@ export default function Home() {
                     </CardDescription>
                   </CardHeader>
 
-                  <CardFooter className="flex flex-row justify-between">
+                  <CardFooter
+                    className={`flex flex-row justify-between ${
+                      res.certification === "paid"
+                        ? "text-red-300"
+                        : "text-green-300"
+                    }`}
+                  >
                     <p>{res.certification}</p>
                     <Button>
                       <a href={res.link}>open</a>
